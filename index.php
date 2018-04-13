@@ -13,7 +13,7 @@
 <body>
   <h1><span class="blue"><span class="yellow">Show list users</pan></h1>  
   <div class="add-user">
-    <a href="">New user</a>
+    <a href="add-user.php">New user</a>
   </div>
   <?php
     $stmt = $conn->prepare("select * from users");
@@ -47,8 +47,8 @@
         <td><?php echo $email ?></td>
         <td><?php echo $phone ?></td>
         <td>
-          <a href="edit-user.html"><i class="fas fa-edit"></i></a> |
-          <a href="delete-user.html"><i class="fas fa-trash-alt"></i></a>
+          <a href="edit-user.php?id_user=<?php echo $id ?>"><i class="fas fa-edit"></i></a> |
+          <a href="del-user.php?id_user=<?php echo $id ?>"><i class="fas fa-trash-alt"></i></a>
         </td>
       </tr>
     </tbody>
