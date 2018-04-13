@@ -1,25 +1,25 @@
-<!DOCTYPE html>
-<html lang="en" >
-
-<head>
-  <meta charset="UTF-8">
-  <title> Responsive</title>
-  <link rel="stylesheet" href="style.css">
-  <?php
-    include("dbconnect.php");
-    $conn = connect();
-  ?>
-</head>
+<?php include("header.php") ?>
 <body>  
-<div class="add-user">
+  <div class="add-user">
     <a href="index.php">Home</a> 
     <a href="add-user.php">New user</a>
   </div>
   <h1><span class="blue"><span class="yellow">Show list users</pan></h1>  
   <?php
-    $stmt = $conn->prepare("select * from users");
+    $sql_pag = $conn->prepare("select count(id) from users");
+    $sql_pag->execute();
+    $row = $sql_pag->fetchColumn();
+    $limit = 5;
+    if(isset($_GET["page"])){
+      $current_page=$_GET["page"];
+    }else{
+      $current_page=1;
+    }
+    $paginate = ceil($row/$limit);
+    $offset = ($current_page - 1) * $limit;
+    $stmt = $conn->prepare("select * from users limit $offset,$limit");
     $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
   ?>
   <table class="container">
     <thead>
@@ -35,6 +35,7 @@
     <tbody>
       <?php
         foreach($result as $key => $values){
+        
           $id = $values['id'] ;
           $full_name =$values['fullname'];
           $user_name =$values['username'];
@@ -54,35 +55,26 @@
       </tr>
     </tbody>
     <?php } ?>
+    
   </table>
-  <style>
-    .add-user {
-      width: 80%;
-      margin: 20px auto; 
-    }
-    .add-user a{
-      background-color: #323C50;
-      text-decoration: none;
-      color: aliceblue;
-      padding: 10px;
-      font-weight: normal;
-      font-size: 1em;
-      -webkit-box-shadow: 0 2px 2px -2px #0E1119;
-        -moz-box-shadow: 0 2px 2px -2px #0E1119;
-              box-shadow: 0 2px 2px -2px #0E1119;
-    }
-    .add-user a:hover {
-      background-color: #FFF842;
-      color: #403E10;
-      font-weight: bold;
-      box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
-      transform: translate3d(6px, -6px, 0);
-      transition-delay: 0s;
-      transition-duration: 0.4s;
-      transition-property: all;
-      transition-timing-function: line;
-    }
-  </style>
+  <div class = "add-user">
+    <?php
+      if($current_page > 1 && $paginate > 1){
+        echo '<a href="index.php?page='.($current_page-1).'">Prev</a> | ';
+      }
+      for ($i = 1; $i <= $paginate; $i++){
+        if ($i == $current_page){
+          echo '<span>'.$i.'</span> | ';
+        }
+        else{
+          echo '<a href="index.php?page='.$i.'">'.$i.'</a> | ';
+        }
+      }
+      if ($current_page < $paginate && $paginate > 1){
+        echo '<a href="index.php?page='.($current_page+1).'">Next</a> ';
+      }
+    ?>
+  </div>
   <script defer src="/static/fontawesome/fontawesome-all.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 </body>

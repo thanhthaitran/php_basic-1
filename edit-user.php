@@ -1,24 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" >
-
-<head>
-  <meta charset="UTF-8">
-  <title> Responsive</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <link rel="stylesheet" href="style.css">
-  <!-- <link rel="stylesheet" href="form.css" > -->
-  <?php
-    include("dbconnect.php");
-    $conn = connect();
-  ?>
-</head>
+<?php include("header.php") ?>
 <body>
   <div class="add-user">
     <a href="index.php">Home</a> 
   </div>
-  <h1><span class="blue"><span class="yellow">Add new user</pan></h1>  
+  <h1><span class="blue"><span class="yellow">Edit user</pan></h1>  
   <div class="container form-top">
     <div class="row">
     <?php
@@ -32,7 +17,6 @@
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        // print_r($result);
         $id = $result['id'];
         $full_name = $result['fullname'];
         $user_name = $result['username'];

@@ -30,7 +30,7 @@ CREATE TABLE `users` (
   `password` varchar(50) NOT NULL,
   `phone` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Tráº§n Thanh ThÃ¡i','thaitran','thaitran.sts@gmail.com','123456','01234568994'),(2,'Nguyá»…n ToÃ n Cáº§u ','cautoan','toannguyen@gmail.com','123456','0905456321'),(3,'Ã Thá»‹ Háº­u','ahau','ahau@gmail.com','123456','01652341258'),(4,'LÃª VÄƒn Lá»£i','loivl','loivl@gmail.com','123456','01234862157'),(5,'Táº¡ BiÃªn CÆ°Æ¡ng','biencuong19','biencuong@gmail.com','123456','0869745235'),(6,'Nguyá»…n Há»“ng Loan','loanla','hongloan@gmail.com','123456','025896314781');
+INSERT INTO `users` VALUES (2,'Nguyễn Toàn Cầu ','cautoan','toannguyen@gmail.com','123456','0905456321'),(3,'Á Thị Hậu','ahau','ahau3@gmail.com','123456','01652341258'),(4,'Lê Văn Lợi','loivl','loivl@gmail.com','123456','01234862157'),(5,'Tạ Biên Cương','biencuong19','biencuong@gmail.com','123456','0869745235'),(6,'Nguyễn Hồng Loan','loanla','hongloan@gmail.com','123456','025896314781'),(7,'Nguyễn Thị Bé','bethiet','benho@gmail.com','aasdasd','123123'),(8,'Hồ Công Trình','congtrinh','congtrinh@gmail.com','aasdasd','123123'),(9,'Adam lalana','lalana','adam@gmail.com','aasdasd','123123'),(10,'Dương Thị Béo','beobeo','beotoantap@gmail.com','231351','123123123'),(13,'asdasdsa','ads','adasd@adasd','asdasd','123123'),(16,'công','conga','cong@gmail.com','asdas','218');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-13  7:18:24
+-- Dump completed on 2018-04-16  2:05:36
