@@ -15,8 +15,11 @@
   ?>
 </head>
 <body>
+  <div class="add-user">
+      <a href="/php">Home</a> 
+    </div>
   <h1><span class="blue"><span class="yellow">Add new user</pan></h1>  
-  <div class="container form-top">
+  <div class="container">
     <div class="row">
     <?php
       if(isset($_POST['add'])){
@@ -33,7 +36,7 @@
           header("LOCATION:index.php?msg=Bạn đã thêm thành công");
           exit();
         }else{ 
-          echo "Có lỗi xảy ra";
+          echo "Có lỗi xảy";
         }        
       }
     ?>
@@ -66,11 +69,38 @@
                 <button class="btn btn-raised btn-lg btn-warning" type="reset">Reset</button>
               </div>
             </form>
-            
           </div>
         </div>
       </div>
     </div>
   </div>
+  <style>
+    .add-user {
+      width: 80%;
+      margin: 20px auto; 
+    }
+    .add-user a{
+      background-color: #323C50;
+      text-decoration: none;
+      color: aliceblue;
+      padding: 10px;
+      font-weight: normal;
+      font-size: 1em;
+      -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+        -moz-box-shadow: 0 2px 2px -2px #0E1119;
+              box-shadow: 0 2px 2px -2px #0E1119;
+    }
+    .add-user a:hover {
+      background-color: #FFF842;
+      color: #403E10;
+      font-weight: bold;
+      box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+      transform: translate3d(6px, -6px, 0);
+      transition-delay: 0s;
+      transition-duration: 0.4s;
+      transition-property: all;
+      transition-timing-function: line;
+    }
+  </style>
 </body>
 </html>

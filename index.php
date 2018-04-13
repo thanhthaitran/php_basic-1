@@ -10,11 +10,12 @@
     $conn = connect();
   ?>
 </head>
-<body>
-  <h1><span class="blue"><span class="yellow">Show list users</pan></h1>  
-  <div class="add-user">
+<body>  
+<div class="add-user">
+    <a href="/php">Home</a> 
     <a href="add-user.php">New user</a>
   </div>
+  <h1><span class="blue"><span class="yellow">Show list users</pan></h1>  
   <?php
     $stmt = $conn->prepare("select * from users");
     $stmt->execute();
@@ -57,7 +58,7 @@
   <style>
     .add-user {
       width: 80%;
-      margin: 0 auto; 
+      margin: 20px auto; 
     }
     .add-user a{
       background-color: #323C50;
