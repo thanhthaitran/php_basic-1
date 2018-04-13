@@ -21,60 +21,78 @@
   <h1><span class="blue"><span class="yellow">Add new user</pan></h1>  
   <div class="container form-top">
     <div class="row">
+    <?php
+      if(isset($_REQUEST['id_user']) and $_REQUEST['id_user'] > 0){
+          $id_user = $_REQUEST['id_user'];
+        }else{
+          header("location:index.php");
+          exit();
+        }
+        $sql = "select * from users where id = {$id_user}";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        // print_r($result);
+        $id = $result['id'];
+        $full_name = $result['fullname'];
+        $user_name = $result['username'];
+        $email = $result['email'];
+        $password = $result['password'];
+        $phone = $result['phone'];
+    ?>
       <div class="col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
-          <div class="panel panel-danger">
-            <div class="panel-body">
-            <?php
-              if(isset($_POST['add'])){
-                $full_name = $_POST['fullname'];
-                $user_name = $_POST['username'];
-                $email = $_POST['email'];
-                $password = $_POST['password'];
-                $phone = $_POST['phone'];
-                $stmt = $conn->prepare("insert into users(fullname,username,email,password,phone)
-                                      values ('$full_name', '$user_name', '$email', '$password', '$phone');");
-                try{
-                  $check = $stmt->execute();
-                  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                  if($check === true ){
-                    header("LOCATION:index.php?msg=Bạn đã thêm thành công");
-                    exit();
-                  }  
-                }catch(PDOException $e){
-            ?>
-            <div class="error_message">
-              <h4>
-                Error
-              </h4>
-              Sorry there was an error sending your form. 
-            </div>
-                <?php
-                  }
+        <div class="panel panel-danger">
+          <div class="panel-body">
+          <?php
+            if(isset($_POST['edit'])){
+              $fullname = $_POST['fullname'];
+              $username = $_POST['username'];
+              $email = $_POST['email'];
+              $password = $_POST['password'];
+              $phone = $_POST['phone'];
+              $sql_edit = "update users set fullname = '$fullname', username = '$username', 
+                          email = '$email', password = '$password', phone = '$phone' where id = {$id}";
+              $stmt_edit = $conn->prepare($sql_edit);
+              try{
+                $check = $stmt_edit->execute();
+                if($check === true ){
+                  header("LOCATION:index.php?msg=Bạn đã thêm thành công");
+                  exit();
                 }
+              }catch(PDOException $e){
               ?>
+              <div class="error_message">
+                <h4>
+                  Error
+                </h4>
+                Sorry there was an error sending your form. 
+              </div>
+            <?php
+            }}
+          ?>
             <form method="post" enctype="multipart/form-data" id="reused_form">
               <div class="form-group">
                 <label >Full Name</label>
-                <input type="text" name="fullname" required class="form-control" placeholder="Enter Your Full Name">
+                <input type="text" name="fullname" required class="form-control" value="<?php echo $full_name ?>">
               </div>
               <div class="form-group">
                 <label >Username</label>
-                <input type="text" name="username" required class="form-control" placeholder="Enter Your Username">
+                <input type="text" name="username" required class="form-control" value="<?php echo $user_name ?>">
               </div>
               <div class="form-group">
                 <label >Email</label>
-                <input type="email" name="email" required class="form-control" placeholder="Enter Your Email">
+                <input type="email" name="email" required class="form-control" value="<?php echo $email ?>">
               </div>
               <div class="form-group">
                 <label >Password</label>
-                <input type="password" name="password" required class="form-control" placeholder="Enter Your Password">
+                <input type="password" name="password" required class="form-control" value="<?php echo $password ?>">
               </div>
               <div class="form-group">
                 <label >Phone</label>
-                <input type="tel" name="phone" required class="form-control" placeholder="Enter Your Phone">
+                <input type="tel" name="phone" required class="form-control" value="<?php echo $phone ?>">
               </div>
               <div class="form-group">
-                <button class="btn btn-raised btn-lg btn-warning" type="submit" name="add" >Send</button>
+                <button class="btn btn-raised btn-lg btn-warning" type="submit" name="edit">Edit</button>
                 <button class="btn btn-raised btn-lg btn-warning" type="reset">Reset</button>
               </div>
             </form>
@@ -83,7 +101,6 @@
       </div>
     </div>
   </div>
-
   <style>
     .error_message {
       margin-bottom: 10px;

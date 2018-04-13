@@ -12,7 +12,7 @@
 </head>
 <body>  
 <div class="add-user">
-    <a href="/php">Home</a> 
+    <a href="index.php">Home</a> 
     <a href="add-user.php">New user</a>
   </div>
   <h1><span class="blue"><span class="yellow">Show list users</pan></h1>  
@@ -49,7 +49,7 @@
         <td><?php echo $phone ?></td>
         <td>
           <a href="edit-user.php?id_user=<?php echo $id ?>"><i class="fas fa-edit"></i></a> |
-          <a href="del-user.php?id_user=<?php echo $id ?>"><i class="fas fa-trash-alt"></i></a>
+          <a href="del-user.php?id_user=<?php echo $id ?>" onclick="alert('Are you sure?');"><i class="fas fa-trash-alt"></i></a>
         </td>
       </tr>
     </tbody>
